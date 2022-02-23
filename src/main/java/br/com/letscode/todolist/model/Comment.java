@@ -1,9 +1,7 @@
 package br.com.letscode.todolist.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -15,22 +13,34 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "task_id")
+    @JoinColumn
+    @Setter
     private Task task;
 
     @NotNull(message = "O texto não pode ser nulo!")
+    @Getter
     private String text;
 
-    @CreatedDate
-    private Date createdAt = new Date();
+    @Getter
+    private Date createdAt;
 
-    @LastModifiedDate
+    @Getter
     private Date updateAt;
+
+    @PrePersist
+    public void preSave() {
+        this.createdAt = new Date();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.updateAt = new Date();
+    }
 }
