@@ -23,9 +23,9 @@ public class CommentController {
         return ResponseEntity.ok(commentService.listAll());
     }
 
-    @PostMapping
-    private ResponseEntity<Comment> save(@RequestBody @Valid Comment comment) {
-        return new ResponseEntity<>(commentService.save(comment), HttpStatus.CREATED);
+    @PostMapping(path = "{id}")
+    private ResponseEntity<Comment> save(@RequestBody @Valid Comment comment, @PathVariable int id) {
+        return new ResponseEntity<>(commentService.save(comment, id), HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/{id}")

@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:file:/C:/development/Santander/Java/todo-list-novo/database
+    url: jdbc:h2:file:/C:/development/todo_list_api/database
     username: sa
     password: password
     driverClassName: org.h2.Driver

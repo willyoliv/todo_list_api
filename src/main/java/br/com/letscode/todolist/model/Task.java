@@ -30,8 +30,6 @@ public class Task {
     @LastModifiedDate
     private Date updateAt = new Date();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @OneToMany(mappedBy = "task",cascade = CascadeType.ALL)
     private List<Comment> comments;
-
 }
