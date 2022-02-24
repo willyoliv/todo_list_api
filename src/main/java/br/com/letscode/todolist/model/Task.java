@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Builder
@@ -19,6 +20,8 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    private UUID userId;
 
     @NotEmpty
     private String title;

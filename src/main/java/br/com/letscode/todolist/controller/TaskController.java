@@ -21,7 +21,7 @@ public class TaskController {
 
     @GetMapping
     private ResponseEntity<List<Task>> listAll() {
-        return ResponseEntity.ok(taskService.listAll());
+        return ResponseEntity.ok(taskService.listAllTasksByUserId());
     }
 
     @PostMapping
@@ -41,7 +41,7 @@ public class TaskController {
     }
 
     @PostMapping(path = "/{id}/comment")
-    private ResponseEntity<Comment> addComment(@PathVariable Integer id, CommentPostRequest commentPostRequest) {
-        return new ResponseEntity<>(taskService.saveCommentInTask(id, commentPostRequest), HttpStatus.BAD_REQUEST);
+    private ResponseEntity<Comment> addComment(@PathVariable Integer id, @RequestBody @Valid CommentPostRequest commentPostRequest) {
+        return new ResponseEntity<>(taskService.saveCommentInTask(id, commentPostRequest), HttpStatus.CREATED);
     }
 }
